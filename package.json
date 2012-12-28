@@ -12,5 +12,8 @@
   },
   "author": "",
   "license": "MIT",
-  "readmeFilename": "README.md"
+  "readmeFilename": "README.md",
+  "dependencies": {
+    "buster": "~0.6.12"
+  }
 }
