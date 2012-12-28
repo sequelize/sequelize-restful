@@ -1,0 +1,16 @@
+{
+  "name": "sequelize-restful",
+  "version": "0.0.0",
+  "description": "A connect module that adds a restful API for all defined models to your application.",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/sdepold/sequelize-restful.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "readmeFilename": "README.md"
+}
