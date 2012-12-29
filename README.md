@@ -2,7 +2,7 @@
 
 A connect module that adds a restful API for all defined models to your application.
 
-## Usage:
+## Usage
 
 ```js
 var express   = require('express')
@@ -23,7 +23,7 @@ http.createServer(app).listen(app.get('port'), function(){
 })
 ```
 
-## Options:
+## Options
 
 ```js
 {
@@ -33,3 +33,6 @@ http.createServer(app).listen(app.get('port'), function(){
   endpoint: '/restful'
 }
 ```
+
+## The API
+
