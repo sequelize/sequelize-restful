@@ -27,8 +27,9 @@ http.createServer(app).listen(app.get('port'), function(){
 
 ```js
 {
-  // Define the path to the restful API.
-  // default: '/api'
+  // Parameter:   endpoint
+  // Description: Define the path to the restful API.
+  // Default:     '/api'
 
   endpoint: '/restful'
 }
@@ -36,3 +37,28 @@ http.createServer(app).listen(app.get('port'), function(){
 
 ## The API
 
+### Get a list of all declared models
+
+```console
+$ curl http://localhost:3000/api
+```
+
+```js
+{
+  "status": "success",
+  "data": [
+    {
+      "name": "Tag",
+      "tableName": "Tags"
+    },
+    {
+      "name": "Image",
+      "tableName": "Images"
+    },
+    {
+      "name": "Project",
+      "tableName": "Projects"
+    }
+  ]
+}
+```
