@@ -132,7 +132,7 @@ Creating a new instance of a model
 
 ```console
 curl -d "title=hallo%20world" http://localhost:3000/admin/api/Tags
-``
+```
 
 ```js
 {
