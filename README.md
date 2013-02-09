@@ -141,8 +141,7 @@ curl -d "title=hallo%20world" http://localhost:3000/admin/api/Tags
     "title": "hallo world",
     "id": 1,
     "createdAt": "2013-02-09T09:48:14.000Z",
-    "updatedAt": "2013-02-09T09:48:14.000Z",
-    "ProjectId": null
+    "updatedAt": "2013-02-09T09:48:14.000Z"
   }
 }
 ```
