@@ -37,7 +37,9 @@ http.createServer(app).listen(app.get('port'), function(){
 
 ## The API
 
-### Get a list of all declared models
+### GET /api
+
+Returns a list of all declared models
 
 ```console
 $ curl http://localhost:3000/api
@@ -63,7 +65,9 @@ $ curl http://localhost:3000/api
 }
 ```
 
-### Describe a declared model
+### HEAD /api/Tags
+
+Returns a description of a declared model
 
 ```console
 $ curl -i -X HEAD http://localhost:3000/api/Tags
