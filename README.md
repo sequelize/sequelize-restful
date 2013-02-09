@@ -62,3 +62,41 @@ $ curl http://localhost:3000/api
   ]
 }
 ```
+
+### Describe a declared model
+
+```console
+$ curl -i -X HEAD http://localhost:3000/api/Tags
+```
+
+The result of the request is part of the response headers! The header's name is `Sequelize-Admin`.
+
+```js
+{
+  "status": "success",
+  "data": {
+    "name": "Tag",
+    "tableName": "Tags",
+    "attributes": {
+      "title": "VARCHAR(255)",
+      "id": {
+        "type": "INTEGER",
+        "allowNull": false,
+        "primaryKey": true,
+        "autoIncrement": true
+      },
+      "createdAt": {
+        "type": "DATETIME",
+        "allowNull": false
+      },
+      "updatedAt": {
+        "type": "DATETIME",
+        "allowNull": false
+      },
+      "ProjectId": {
+        "type": "INTEGER"
+      }
+    }
+  }
+}
+```
