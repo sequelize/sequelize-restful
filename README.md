@@ -104,3 +104,24 @@ The result of the request is part of the response headers! The header's name is 
   }
 }
 ```
+
+### GET /api/Tags/1
+
+Returns the data of the Tag with the id 1.
+
+```console
+$ curl http://localhost:3000/api/Tags/1
+```
+
+```js
+{
+  "status": "success",
+  "data": {
+    "title": "foo",
+    "id": 1,
+    "createdAt": "2013-02-09T09:48:14.000Z",
+    "updatedAt": "2013-02-09T09:48:14.000Z",
+    "ProjectId": 1
+  }
+}
+```
