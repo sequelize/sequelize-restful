@@ -44,7 +44,7 @@ describe('Router', function() {
     describe('/api/photos', function() {
       describe('GET', function() {
         it('returns an empty array if no table entries were created before', function(done) {
-          this.router.handleRequest('GET', '/api/photos', function(response) {
+          this.router.handleRequest({ method: 'GET', path: '/api/photos', body: null }, function(response) {
             expect(response.status).toEqual('success')
             expect(response.data).toEqual([])
             done()
@@ -52,8 +52,8 @@ describe('Router', function() {
         })
 
         it('returns an array if one entry if the dataset was created before', function(done) {
-          this.Photo.create({ name: 'fnord' }).success(function() {
-            this.router.handleRequest('GET', '/api/photos', function(response) {
+          this.Photo.create({ name: 'fnord' }).complete(function(err) {
+            this.router.handleRequest({ method: 'GET', path: '/api/photos', body: null }, function(response) {
               expect(response.status).toEqual('success')
               expect(response.data.length).toEqual(1)
               expect(response.data[0].name).toEqual('fnord')

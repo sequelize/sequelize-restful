@@ -19,6 +19,6 @@
   },
   "devDependencies": {
     "buster": "~0.6.12",
-    "sequelize": "1.6.0-beta4"
+    "sequelize": "git://github.com/sdepold/sequelize.git#5fa778ea765e05c2eedcd8139487020a453359ad"
   }
 }
