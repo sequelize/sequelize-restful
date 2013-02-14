@@ -8,15 +8,17 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/sdepold/sequelize-restful.git"
+    "url": "git://github.com/sequelize/sequelize-restful.git"
   },
   "author": "",
   "license": "MIT",
   "readmeFilename": "README.md",
   "dependencies": {
-    "buster": "~0.6.12",
     "lodash": "~1.0.0-rc.3",
-    "sequelize": "git://github.com/sdepold/sequelize.git#5fa778ea765e05c2eedcd8139487020a453359ad",
     "connect": "~2.7.2"
+  },
+  "devDependencies": {
+    "buster": "~0.6.12",
+    "sequelize": "1.6.0-beta4"
   }
 }
