@@ -131,7 +131,7 @@ $ curl http://localhost:3000/api/Tags/1
 Creating a new instance of a model
 
 ```console
-curl -d "title=hallo%20world" http://localhost:3000/admin/api/Tags
+curl -d "title=hallo%20world" http://localhost:3000/api/Tags
 ```
 
 ```js
@@ -145,3 +145,42 @@ curl -d "title=hallo%20world" http://localhost:3000/admin/api/Tags
   }
 }
 ```
+
+### UPDATE /api/Tags/1
+
+Updating an already existing instance of a model
+
+```console
+curl -d "title=fnord" -X PUT http://localhost:3000/api/Tags/1
+```
+
+It returns the updated record
+
+```js
+{
+  "status": "success",
+  "data": {
+    "title": "fnord",
+    "id": 1,
+    "createdAt": "2013-02-14T19:52:04.000Z",
+    "updatedAt": "2013-02-14T19:53:30.066Z",
+    "ProjectId": 1
+  }
+}
+```
+
+### DELETE /api/Tags/1
+
+Deleting an existing instance of a model
+
+```console
+curl -i -X DELETE http://localhost:3000/admin/api/Tags/3
+```
+
+```js
+{
+  "status": "success",
+  "data": {}
+}
+```
+
