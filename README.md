@@ -1,6 +1,6 @@
-# sequelize-restful
+# sequelize-restful-associations
 
-A connect module that adds a restful API for all defined models to your application.
+A connect module based on a fork of sequelize-restful that adds a one level of associative capability to a restful API. A part from give you the feature to define which model should been exposed throw this restful API.
 
 ## Usage
 
@@ -31,7 +31,13 @@ http.createServer(app).listen(app.get('port'), function(){
   // Description: Define the path to the restful API.
   // Default:     '/api'
 
-  endpoint: '/restful'
+  endpoint: '/restful',
+
+  // Parameter:   allowed
+  // Description: Define which models will be exposed through the restful API
+  // Default:     'new Array()' if it is an Empty array, all the models will be exposed by default
+
+  allowed: new Array('Model0', 'Model1', 'Model2')
 }
 ```
 
@@ -184,3 +190,41 @@ curl -i -X DELETE http://localhost:3000/admin/api/Tags/3
 }
 ```
 
+## The API for Associations
+
+### GET /api/Tags/1/Posts
+
+Returns all the instance of 'associated_dao_factory' associated to the instance 1 of 'dao_factory'
+
+```console
+curl -i -X GET http://localhost:3000/admin/api/Projects/1/Tags
+
+```
+
+```js
+{
+  "status": "success",
+  "data": {
+    "title": "foo",
+    "id": 1,
+    "createdAt": "2013-02-09T09:48:14.000Z",
+    "updatedAt": "2013-02-09T09:48:14.000Z",
+    "ProjectId": 1
+  }
+}
+```
+
+### DELETE /api/Projects/1/Tags/1
+
+Deleting an existing association between instances
+
+```console
+curl -i -X DELETE http://localhost:3000/admin/api/Projects/1/Tags/3
+```
+
+```js
+{
+  "status": "success",
+  "data": {}
+}
+```
