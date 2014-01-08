@@ -192,7 +192,7 @@ curl -i -X DELETE http://localhost:3000/admin/api/Tags/3
 
 ## The API for Associations
 
-### GET /api/Tags/1/Posts
+### GET /api/Projects/1/Tags
 
 Returns all the instance of 'associated_dao_factory' associated to the instance 1 of 'dao_factory'
 
