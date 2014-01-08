@@ -1,6 +1,6 @@
 # sequelize-restful-associations
 
-A connect module based on a fork of sequelize-restful that adds a one level of associative capability to a restful API. A part from give you the feature to define which model should been exposed throw this restful API.
+A connect module based on a fork of sequelize-restful that adds a one level of associative capability to a restful API. A part from give you the feature to define which model should been exposed through this restful API.
 
 ## Usage
 
