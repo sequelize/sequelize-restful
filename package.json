@@ -4,7 +4,7 @@
   "description": "A connect module that adds a restful API for all defined models to your application.",
   "main": "lib/index.js",
   "scripts": {
-    "test": "node_modules/.bin/buster-test -c buster.js"
+    "test": "node_modules/.bin/mocha"
   },
   "repository": {
     "type": "git",
@@ -18,7 +18,8 @@
     "connect": "~2.7.2"
   },
   "devDependencies": {
-    "buster": "~0.6.12",
-    "sequelize": "git://github.com/sdepold/sequelize.git#5fa778ea765e05c2eedcd8139487020a453359ad"
+    "mocha": "~1.17.0",
+    "sequelize": "git://github.com/sdepold/sequelize.git#5fa778ea765e05c2eedcd8139487020a453359ad",
+    "expect.js": "~0.2.0"
   }
 }
