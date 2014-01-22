@@ -153,6 +153,27 @@ describe('Router', function() {
           })
         })
       })
+
+      describe('DELETE', function() {
+        it('deletes a resource', function(done) {
+          var self = this
+
+          this.Photo.count().success(function(photoCountBefore) {
+            self.router.handleRequest({
+              method: 'DELETE',
+              path:   '/api/photos/' + self.photoId,
+              body:   null
+            }, function(response) {
+              expect(response.status).to.equal('success')
+
+              self.Photo.count().success(function(photoCountAfter) {
+                expect(photoCountAfter).to.equal(photoCountBefore - 1)
+                done()
+              })
+            })
+          })
+        })
+      })
     })
   })
 })
