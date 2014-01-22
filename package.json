@@ -19,7 +19,8 @@
   },
   "devDependencies": {
     "mocha": "~1.17.0",
-    "sequelize": "git://github.com/sdepold/sequelize.git#5fa778ea765e05c2eedcd8139487020a453359ad",
+    "sequelize": "1.7.0-rc2",
+    "mysql": "2.0.1",
     "expect.js": "~0.2.0"
   }
 }
