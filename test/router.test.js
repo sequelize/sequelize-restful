@@ -135,6 +135,24 @@ describe('Router', function() {
           })
         })
       })
+
+      describe('PUT', function() {
+        it('updates a resource', function(done) {
+          var self = this
+
+          this.router.handleRequest({
+            method: 'PUT',
+            path:   '/api/photos/' + this.photoId,
+            body:   { name: 'another name' }
+          }, function(response) {
+            self.Photo.find(self.photoId).success(function(photo) {
+              expect(response.data.name).to.equal('another name')
+              expect(photo.name).to.equal('another name')
+              done()
+            })
+          })
+        })
+      })
     })
   })
 })
