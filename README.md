@@ -214,6 +214,21 @@ curl -i -X GET http://localhost:3000/admin/api/Projects/1/Tags
 }
 ```
 
+### DELETE /api/Photo/1/Photographer
+
+Deleting an existing association for 1:1 or N:1 association.
+
+```console
+curl -i -X DELETE http://localhost:3000/admin/api/Photo/1/Photographer
+```
+
+```js
+{
+  "status": "success",
+  "data": {}
+}
+```
+
 ### DELETE /api/Projects/1/Tags/1
 
 Deleting an existing association between instances
