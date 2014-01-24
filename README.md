@@ -152,7 +152,7 @@ curl -d "title=hallo%20world" http://localhost:3000/api/Tags
 }
 ```
 
-### UPDATE /api/Tags/1
+### PUT /api/Tags/1
 
 Updating an already existing instance of a model
 

@@ -60,6 +60,120 @@ describe('Router', function() {
           }.bind(this))
         })
       })
+
+      describe('POST', function() {
+        it('creates a new photo instance', function(done) {
+          var self = this
+
+          this.Photo.count().success(function(photoCountBefore) {
+            self.router.handleRequest({
+              method: 'POST',
+              path: '/api/photos',
+              body: {
+                name: 'my lovely photo'
+              }
+            }, function() {
+              self.Photo.count().success(function(photoCountAfter) {
+                expect(photoCountAfter).to.equal(photoCountBefore + 1)
+                done()
+              })
+            })
+          })
+        })
+      })
+
+      describe('HEAD', function() {
+        it('returns the structure of the model', function(done) {
+          this.router.handleRequest({
+            method: 'HEAD',
+            path:   '/api/photos',
+            body:   null
+          }, function(response) {
+            expect(response.status).to.equal('success')
+
+            expect(response.data.name).to.equal('Photo')
+            expect(response.data.tableName).to.equal('photos')
+
+            expect(Object.keys(response.data.attributes)).to.eql(['id', 'name', 'createdAt', 'updatedAt'])
+
+            done()
+          })
+        })
+      })
+    })
+
+    describe('/api/photos/<id>', function() {
+      before(function(done) {
+        var self = this
+
+        this.Photo.destroy().success(function() {
+          self.Photo.create({ name: 'a lovely photo' }).success(function(photo) {
+            self.photoId = photo.id
+            done()
+          })
+        })
+      })
+
+      describe('GET', function() {
+        it('returns the information of the photo', function(done) {
+          var self = this
+
+          this.router.handleRequest({
+            method: 'GET',
+            path:   '/api/photos/' + this.photoId,
+            body:   null
+          }, function(response) {
+            expect(response.status).to.equal('success')
+            expect(response.data.id).to.equal(self.photoId)
+            expect(response.data.name).to.equal('a lovely photo')
+
+            // this seems to be a bug ...
+            expect(response.data.createdAt).to.be.a('object')
+            expect(response.data.updatedAt).to.be.a('object')
+
+            done()
+          })
+        })
+      })
+
+      describe('PUT', function() {
+        it('updates a resource', function(done) {
+          var self = this
+
+          this.router.handleRequest({
+            method: 'PUT',
+            path:   '/api/photos/' + this.photoId,
+            body:   { name: 'another name' }
+          }, function(response) {
+            self.Photo.find(self.photoId).success(function(photo) {
+              expect(response.data.name).to.equal('another name')
+              expect(photo.name).to.equal('another name')
+              done()
+            })
+          })
+        })
+      })
+
+      describe('DELETE', function() {
+        it('deletes a resource', function(done) {
+          var self = this
+
+          this.Photo.count().success(function(photoCountBefore) {
+            self.router.handleRequest({
+              method: 'DELETE',
+              path:   '/api/photos/' + self.photoId,
+              body:   null
+            }, function(response) {
+              expect(response.status).to.equal('success')
+
+              self.Photo.count().success(function(photoCountAfter) {
+                expect(photoCountAfter).to.equal(photoCountBefore - 1)
+                done()
+              })
+            })
+          })
+        })
+      })
     })
   })
 })
