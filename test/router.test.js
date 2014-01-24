@@ -180,7 +180,7 @@ describe('Router', function() {
       })
     })
 
-    describe('/api/photos/<id>/photographer', function() {
+    describe('associations', function() {
       before(function(done) {
         var self         = this
           , photo        = null
@@ -201,20 +201,46 @@ describe('Router', function() {
           })
       })
 
-      describe('GET', function() {
-        it('returns information about the photos photographer', function(done) {
-          var self = this
+      describe('/api/photos/<id>/photographer', function() {
+        describe('GET', function() {
+          it('returns information about the photos photographer', function(done) {
+            var self = this
 
-          this.router.handleRequest({
-            method: 'GET',
-            path:   "/api/photos/" + this.photo.id + "/photographer",
-            body:   null
-          }, function(response) {
-            expect(response.status).to.equal('success')
-            expect(Object.keys(response.data)).to.eql(['id', 'name', 'createdAt', 'updatedAt'])
-            expect(response.data.name).to.equal('Doctor Who')
+            this.router.handleRequest({
+              method: 'GET',
+              path:   "/api/photos/" + this.photo.id + "/photographer",
+              body:   null
+            }, function(response) {
+              expect(response.status).to.equal('success')
+              expect(Object.keys(response.data).sort()).to.eql(['id', 'name', 'createdAt', 'updatedAt'].sort())
+              expect(response.data.name).to.equal('Doctor Who')
 
-            done()
+              done()
+            })
+          })
+        })
+      })
+
+      describe('/api/photographers/<id>/photos', function() {
+        describe('GET', function() {
+          it('returns information about the photos photographer', function(done) {
+            var self = this
+
+            this.router.handleRequest({
+              method: 'GET',
+              path:   "/api/photographers/" + this.photographer.id + "/photos",
+              body:   null
+            }, function(response) {
+              expect(response.status).to.equal('success')
+
+              expect(response.data).to.be.an(Array)
+              expect(response.data.length).to.equal(1)
+
+              expect(Object.keys(response.data[0]).sort()).to.eql(Object.keys(self.photo.values).sort())
+              expect(response.data[0].name).to.equal('wondercat')
+
+              done()
+            })
           })
         })
       })
