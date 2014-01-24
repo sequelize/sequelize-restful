@@ -181,7 +181,7 @@ describe('Router', function() {
     })
 
     describe('associations', function() {
-      before(function(done) {
+      beforeEach(function(done) {
         var self         = this
           , photo        = null
           , photographer = null
@@ -219,11 +219,30 @@ describe('Router', function() {
             })
           })
         })
+
+        describe('DELETE', function() {
+          it('removes the association', function(done) {
+            var self = this
+
+            this.router.handleRequest({
+              method: 'DELETE',
+              path:   "/api/photos/" + this.photo.id + "/photographer",
+              body:   null
+            }, function(response) {
+              expect(response.status).to.equal('success')
+
+              self.photo.reload().success(function(photo) {
+                expect(photo.photographerId).to.not.be.ok()
+                done()
+              })
+            })
+          })
+        })
       })
 
       describe('/api/photographers/<id>/photos', function() {
         describe('GET', function() {
-          it('returns information about the photos photographer', function(done) {
+          it("returns information about the photographer's photos", function(done) {
             var self = this
 
             this.router.handleRequest({
@@ -240,6 +259,27 @@ describe('Router', function() {
               expect(response.data[0].name).to.equal('wondercat')
 
               done()
+            })
+          })
+        })
+      })
+
+      describe('/api/photographers/<id>/photos/<id>', function() {
+        describe('DELETE', function() {
+          it("removes the association", function(done) {
+            var self = this
+
+            this.router.handleRequest({
+              method: 'DELETE',
+              path:   "/api/photographers/" + this.photographer.id + "/photos/" + this.photo.id,
+              body:   null
+            }, function(response) {
+              expect(response.status).to.equal('success')
+
+              self.photo.reload().success(function(photo) {
+                expect(photo.photographerId).to.not.be.ok()
+                done()
+              })
             })
           })
         })
