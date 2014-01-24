@@ -26,9 +26,13 @@ describe('Router', function() {
 
   describe('handleRequest', function() {
     before(function(done) {
-      this.sequelize = new Sequelize(config.database, config.username, config.password, config)
-      this.Photo     = this.sequelize.define('Photo', { name: Sequelize.STRING }, { tableName: 'photos' })
-      this.router    = new Router(this.sequelize, {})
+      this.sequelize    = new Sequelize(config.database, config.username, config.password, config)
+      this.Photo        = this.sequelize.define('Photo', { name: Sequelize.STRING }, { tableName: 'photos' })
+      this.Photographer = this.sequelize.define('Photographer', { name: Sequelize.STRING }, { tableName: 'photographers' })
+      this.router       = new Router(this.sequelize, {})
+
+      this.Photo.belongsTo(this.Photographer)
+      this.Photographer.hasMany(this.Photo)
 
       this.sequelize.sync({ force: true }).complete(function(err) {
         if (err) {
@@ -94,7 +98,7 @@ describe('Router', function() {
             expect(response.data.name).to.equal('Photo')
             expect(response.data.tableName).to.equal('photos')
 
-            expect(Object.keys(response.data.attributes)).to.eql(['id', 'name', 'createdAt', 'updatedAt'])
+            expect(Object.keys(response.data.attributes)).to.eql(['id', 'name', 'createdAt', 'updatedAt', 'photographerId'])
 
             done()
           })
@@ -171,6 +175,46 @@ describe('Router', function() {
                 done()
               })
             })
+          })
+        })
+      })
+    })
+
+    describe('/api/photos/<id>/photographer', function() {
+      before(function(done) {
+        var self         = this
+          , photo        = null
+          , photographer = null
+
+
+        this.Photo
+          .destroy()
+          .then(function() { return self.Photographer.destroy() })
+          .then(function() { return self.Photographer.create({ name: 'Doctor Who' }) })
+          .then(function(p) {
+            self.photographer = p
+            return self.Photo.create({ name: 'wondercat', photographerId: p.id })
+          })
+          .then(function(p) {
+            self.photo = p
+            done()
+          })
+      })
+
+      describe('GET', function() {
+        it('returns information about the photos photographer', function(done) {
+          var self = this
+
+          this.router.handleRequest({
+            method: 'GET',
+            path:   "/api/photos/" + this.photo.id + "/photographer",
+            body:   null
+          }, function(response) {
+            expect(response.status).to.equal('success')
+            expect(Object.keys(response.data)).to.eql(['id', 'name', 'createdAt', 'updatedAt'])
+            expect(response.data.name).to.equal('Doctor Who')
+
+            done()
           })
         })
       })
