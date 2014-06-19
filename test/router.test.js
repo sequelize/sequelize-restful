@@ -66,13 +66,16 @@ describe('Router', function() {
 
         it('returns an array matching only the attributes requested', function(done) {
           this.Photo.create({ name: 'dronf' }).complete(function(err) {
-            this.router.handleRequest({method: 'GET', path: '/api/photos', query: { name: 'dronf' }, body: null}, function(response) {
-              console.log(response);
-              expect(response.status).to.equal('success')
-              expect(response.data.length).to.equal(1)
-              expect(response.data[0].name).to.equal('dronf')
-              done()
-            })
+            this.Photo.create({ name: 'dron' }).complete(function(err) {
+              this.Photo.create({ name: 'omnom' }).complete(function(err) {
+                this.router.handleRequest({method: 'GET', path: '/api/photos', query: { name: 'dronf' }, body: null}, function(response) {
+                  expect(response.status).to.equal('success')
+                  expect(response.data.length).to.equal(1)
+                  expect(response.data[0].name).to.equal('dronf')
+                  done()
+                })
+              }.bind(this))
+            }.bind(this))
           }.bind(this))
         })
       })
