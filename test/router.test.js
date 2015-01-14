@@ -2,9 +2,8 @@ var expect    = require('expect.js')
   , Router    = require('../lib/router')
   , Sequelize = require('sequelize')
   , config    = {
-      database: 'sequelize_test',
-      username: 'root',
-      password: null,
+      dialect: 'sqlite',
+      storage: 'test/sequelize-restful-test.sqlite',
       logging:  false
     }
 
@@ -26,7 +25,7 @@ describe('Router', function() {
 
   describe('handleRequest', function() {
     before(function(done) {
-      this.sequelize    = new Sequelize(config.database, config.username, config.password, config)
+      this.sequelize    = new Sequelize(null, null, null, config)
       this.Photo        = this.sequelize.define('Photo', { name: Sequelize.STRING }, { tableName: 'photos' })
       this.Photographer = this.sequelize.define('Photographer', { name: Sequelize.STRING }, { tableName: 'photographers' })
       this.router       = new Router(this.sequelize, {})

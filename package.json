@@ -20,6 +20,7 @@
   "devDependencies": {
     "mocha": "~1.17.0",
     "sequelize": "1.7.0-rc2",
+    "sqlite3": "~3.0.0",
     "mysql": "2.0.1",
     "expect.js": "~0.2.0"
   }
