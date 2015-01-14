@@ -172,6 +172,24 @@ describe('Router', function() {
         })
       })
 
+      describe('PATCH', function() {
+        it('updates a resource', function(done) {
+          var self = this
+
+          this.router.handleRequest({
+            method: 'PATCH',
+            path:   '/api/photos/' + this.photoId,
+            body:   { name: 'yet another name' }
+          }, function(response) {
+            self.Photo.find(self.photoId).success(function(photo) {
+              expect(response.data.name).to.equal('yet another name')
+              expect(photo.name).to.equal('yet another name')
+              done()
+            })
+          })
+        })
+      })
+
       describe('DELETE', function() {
         it('deletes a resource', function(done) {
           var self = this
