@@ -1,6 +1,6 @@
 {
   "name": "sequelize-restful",
-  "version": "0.3.1",
+  "version": "0.4.0",
   "description": "A connect module that adds a restful API for all defined models to your application.",
   "main": "lib/index.js",
   "scripts": {
