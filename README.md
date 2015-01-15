@@ -1,10 +1,10 @@
-# sequelize-restful
+# sequelize-restful [![Build Status](https://secure.travis-ci.org/sequelize/sequelize-restful.png)](http://travis-ci.org/sequelize/sequelize-restful)
 
 A connect module based on a fork of sequelize-restful that adds a one level of associative capability to a restful API. It also lets you define which model should be exposed through this restful API.
 
 ## Unmaintained
 
-This project is not actively developed/maintained. As a result of that, you won't be able to create issues any longer. I will happily merge pull requests, though. Please consider using [epilogue](https://github.com/dchester/epilogue). 
+This project is not actively developed/maintained. As a result of that, you won't be able to create issues any longer. I will happily merge pull requests, though. Please consider using [epilogue](https://github.com/dchester/epilogue).
 
 ## Usage
 
