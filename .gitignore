@@ -13,3 +13,8 @@ results
 
 npm-debug.log
 node_modules
+
+test/sequelize-restful-test.sqlite
+
+*.iml
+.idea

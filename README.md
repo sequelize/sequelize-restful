@@ -179,6 +179,17 @@ It returns the updated record
 }
 ```
 
+### PATCH /api/Tags/1
+
+Updating an already existing instance of a model
+
+```console
+curl -d "title=fnord" -X PATCH http://localhost:3000/api/Tags/1
+```
+
+Is processed and returns updated record equivalent to [PUT /api/Tags/1](#put-apitags1).
+
+
 ### DELETE /api/Tags/1
 
 Deleting an existing instance of a model

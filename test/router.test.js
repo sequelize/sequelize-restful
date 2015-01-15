@@ -2,9 +2,8 @@ var expect    = require('expect.js')
   , Router    = require('../lib/router')
   , Sequelize = require('sequelize')
   , config    = {
-      database: 'sequelize_test',
-      username: 'root',
-      password: null,
+      dialect: 'sqlite',
+      storage: 'test/sequelize-restful-test.sqlite',
       logging:  false
     }
 
@@ -26,7 +25,7 @@ describe('Router', function() {
 
   describe('handleRequest', function() {
     before(function(done) {
-      this.sequelize    = new Sequelize(config.database, config.username, config.password, config)
+      this.sequelize    = new Sequelize(null, null, null, config)
       this.Photo        = this.sequelize.define('Photo', { name: Sequelize.STRING }, { tableName: 'photos' })
       this.Photographer = this.sequelize.define('Photographer', { name: Sequelize.STRING }, { tableName: 'photographers' })
       this.router       = new Router(this.sequelize, {})
@@ -167,6 +166,24 @@ describe('Router', function() {
             self.Photo.find(self.photoId).success(function(photo) {
               expect(response.data.name).to.equal('another name')
               expect(photo.name).to.equal('another name')
+              done()
+            })
+          })
+        })
+      })
+
+      describe('PATCH', function() {
+        it('updates a resource', function(done) {
+          var self = this
+
+          this.router.handleRequest({
+            method: 'PATCH',
+            path:   '/api/photos/' + this.photoId,
+            body:   { name: 'yet another name' }
+          }, function(response) {
+            self.Photo.find(self.photoId).success(function(photo) {
+              expect(response.data.name).to.equal('yet another name')
+              expect(photo.name).to.equal('yet another name')
               done()
             })
           })
