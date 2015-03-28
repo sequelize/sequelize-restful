@@ -83,7 +83,7 @@ describe('Router', function() {
         it('creates a new photo instance', function(done) {
           var self = this
 
-          this.Photo.count().success(function(photoCountBefore) {
+          this.Photo.count().then(function(photoCountBefore) {
             self.router.handleRequest({
               method: 'POST',
               path: '/api/photos',
@@ -91,7 +91,7 @@ describe('Router', function() {
                 name: 'my lovely photo'
               }
             }, function() {
-              self.Photo.count().success(function(photoCountAfter) {
+              self.Photo.count().then(function(photoCountAfter) {
                 expect(photoCountAfter).to.equal(photoCountBefore + 1)
                 done()
               })
@@ -124,8 +124,8 @@ describe('Router', function() {
       before(function(done) {
         var self = this
 
-        this.Photo.destroy().success(function() {
-          self.Photo.create({ name: 'a lovely photo' }).success(function(photo) {
+        this.Photo.destroy().then(function() {
+          self.Photo.create({ name: 'a lovely photo' }).then(function(photo) {
             self.photoId = photo.id
             done()
           })
@@ -163,7 +163,7 @@ describe('Router', function() {
             path:   '/api/photos/' + this.photoId,
             body:   { name: 'another name' }
           }, function(response) {
-            self.Photo.find(self.photoId).success(function(photo) {
+            self.Photo.find(self.photoId).then(function(photo) {
               expect(response.data.name).to.equal('another name')
               expect(photo.name).to.equal('another name')
               done()
@@ -181,7 +181,7 @@ describe('Router', function() {
             path:   '/api/photos/' + this.photoId,
             body:   { name: 'yet another name' }
           }, function(response) {
-            self.Photo.find(self.photoId).success(function(photo) {
+            self.Photo.find(self.photoId).then(function(photo) {
               expect(response.data.name).to.equal('yet another name')
               expect(photo.name).to.equal('yet another name')
               done()
@@ -194,7 +194,7 @@ describe('Router', function() {
         it('deletes a resource', function(done) {
           var self = this
 
-          this.Photo.count().success(function(photoCountBefore) {
+          this.Photo.count().then(function(photoCountBefore) {
             self.router.handleRequest({
               method: 'DELETE',
               path:   '/api/photos/' + self.photoId,
@@ -202,7 +202,7 @@ describe('Router', function() {
             }, function(response) {
               expect(response.status).to.equal('success')
 
-              self.Photo.count().success(function(photoCountAfter) {
+              self.Photo.count().then(function(photoCountAfter) {
                 expect(photoCountAfter).to.equal(photoCountBefore - 1)
                 done()
               })
@@ -263,7 +263,7 @@ describe('Router', function() {
             }, function(response) {
               expect(response.status).to.equal('success')
 
-              self.photo.reload().success(function(photo) {
+              self.photo.reload().then(function(photo) {
                 expect(photo.photographerId).to.not.be.ok()
                 done()
               })
@@ -308,7 +308,7 @@ describe('Router', function() {
             }, function(response) {
               expect(response.status).to.equal('success')
 
-              self.photo.reload().success(function(photo) {
+              self.photo.reload().then(function(photo) {
                 expect(photo.photographerId).to.not.be.ok()
                 done()
               })
