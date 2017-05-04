@@ -1,5 +1,7 @@
 # sequelize-restful [![Build Status](https://secure.travis-ci.org/sequelize/sequelize-restful.png)](http://travis-ci.org/sequelize/sequelize-restful)
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/sequelize/sequelize-restful.svg)](https://greenkeeper.io/)
+
 A connect module based on a fork of sequelize-restful that adds a one level of associative capability to a restful API. It also lets you define which model should be exposed through this restful API.
 
 ## Unmaintained
