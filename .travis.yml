@@ -16,6 +16,9 @@ node_js:
   - "0.10"
   - "0.11"
 
+git:
+  depth: 5
+
 branches:
   only:
     - master
